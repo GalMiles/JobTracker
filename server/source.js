@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 // app.use(bodyParser.json());
 
-const emails = "Gals email";
+const emails = ["Gals email-1", "Gals email-2"];
 
 app.get('/api/emails', (req, res) => {
   res.json(emails);
