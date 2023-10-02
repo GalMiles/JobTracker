@@ -12,13 +12,7 @@ async function connectDB() {
         console.log(err);
     }
 }
-// mongoose.connect("mongodb+srv://brit:Bl713713@crud.ldrup1x.mongodb.net/emails?retryWrites=true&w=majority", {
-//     useNewUrlParser: true
-// });
 
-// mongoose.connection.on('connected', () => {
-//     console.log('Connection to MongoDB successful!');
-// });
 
 async function insertJob(req, res) {
     const emailTitle = req.body.emailTitle;
