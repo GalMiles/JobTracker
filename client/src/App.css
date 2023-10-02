@@ -12,6 +12,7 @@ body {
   font-family: "Poppins";
 }
 
+
 .App {
   text-align: center;
   display: flex;
@@ -20,11 +21,43 @@ body {
   align-items: center;
 }
 
+.input-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+
+}
+.column {
+  display: flex;
+  flex-direction: column;
+
+}
+.img-logo {
+  left: 0;
+  top:0;
+  position: absolute;
+  align-items: left;
+}
+.header {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 input, button {
   width: 200px;
   height: 30px;
   font-size: 20px;
-  margin: 5px;
+  margin: 10px;
+  padding: auto;
+  margin-right: 40px;
+
+}
+label {
+  text-align: left;
+  margin-left: 10px;
 }
 
 

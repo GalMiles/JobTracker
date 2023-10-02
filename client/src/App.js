@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import Axios from "axios";
+import axios from "axios";
 
 // Brit Try
 function App(){
@@ -14,7 +14,7 @@ function App(){
   const [newJobTitle, setNewJobTitle] = useState('');
 
   useEffect(()=>{
-    Axios.get("http://localhost:5000/read").then((response)=>{
+    axios.get("http://localhost:5000/read").then((response)=>{
       setEmailsList(response.data);
     });
   },[]);
@@ -23,7 +23,7 @@ function App(){
   // insert new information
   const addToList = async () => {
     try {
-      const response = await Axios.post("http://localhost:5000/insert", {
+      const response = await axios.post("http://localhost:5000/insert", {
         emailTitle,
         emailBody,
         jobTitle,
@@ -44,30 +44,41 @@ function App(){
   };
 
   const updatejobtitle = (id) => {
-    Axios.put("http://localhost:5000/update", {
+    axios.put("http://localhost:5000/update", {
       id: id, 
       newJobTitle: newJobTitle,
     });
   };
 
   const deleteJob = (id) => {
-    Axios.delete(`http://localhost:5000/delete/${id}`)
+    axios.delete(`http://localhost:5000/delete/${id}`)
     
   };
 
   return(
     <div className ="App">
-      <h1> JobTrackr </h1>
+      <div className='header'>
+      <img src='/app-logo1.png' alt='app-logo' className='img-logo' height={120} />
+      </div>
 
+      <div className='input-container'> 
+      <div className='column'>
       <label> Email Title: </label>
       <input type="text" onChange={event => {setEmailTitle(event.target.value);}} />
       <label> Email body: </label>
       <input type="text" onChange={event => {setEmailBody(event.target.value);}}/>
+      </div>
+
+      <div className='column'>
       <label> Job Title: </label>
       <input type="text" onChange={event => {setJoblTitle(event.target.value);}} />
       <label> Job Company: </label>
       <input type="text" onChange={event => {setJobCompany(event.target.value);}} />
+      </div>
+      </div>
       <button onClick={addToList}> Add To List</button>
+
+      
 
       <h1> Emails List </h1>
 
