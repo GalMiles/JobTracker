@@ -1,7 +1,7 @@
 # JobTracker
 
  Web app that tracks automatically your job applications.
- Based on getting email every job you apply, JobTracker know to fetch relevant job emails and organize it in one place.
+ Based on getting email every job you apply, JobTracker fetchs relevant job emails and organizes it in one place.
  
 ## Backend
 * Node.js + Express
