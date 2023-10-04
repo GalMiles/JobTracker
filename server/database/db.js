@@ -13,7 +13,6 @@ async function connectDB() {
     }
 }
 
-
 async function insertJob(req, res) {
     const emailTitle = req.body.emailTitle;
     const emailBody = req.body.emailBody;
