@@ -2,12 +2,35 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 5000;
+const {getEmails, convertToJob} = require('./emails');
+const fs = require('fs');
+const file_path = './jobs.json';
 const db = require('./database/db');
 
 
 app.use(cors());
 app.use(express.json());
 // app.use(bodyParser.json());
+
+(async () => {
+  try {
+    const res = await getEmails();
+    let jobEmails = res.filter(email => email.from.includes('LinkedIn <jobs-noreply@linkedin.com>'));
+    jobEmails = jobEmails.filter(email => email.subject.includes('your application was sent to'));
+    jobEmails = convertToJob(jobEmails);
+    await fs.writeFile(file_path, JSON.stringify(jobEmails), (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('File written successfully\n');
+      }
+    });
+    console.log('finish');
+    console.log(jobEmails); // Log the emails after fetching is complete
+  } catch (e) {
+    console.error('Outer error has occurred:', e);
+  }
+})();
 
 db.connectDB();
 
@@ -54,8 +77,5 @@ app.delete("/delete/:id", async (req,res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-console.log('Hi');
-// getEmails();
 
 
