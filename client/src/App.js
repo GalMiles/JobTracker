@@ -1,4 +1,5 @@
 import './App.css';
+import Table from './components/Table';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
@@ -16,6 +17,7 @@ function App(){
   useEffect(()=>{
     axios.get("http://localhost:5000/read").then((response)=>{
       setEmailsList(response.data);
+      console.log('');
     });
   },[]);
 
@@ -62,14 +64,7 @@ function App(){
       </div>
 
       <div className='input-container'> 
-      <div className='column'>
-      <label> Email Title: </label>
-      <input type="text" onChange={event => {setEmailTitle(event.target.value);}} />
-      <label> Email body: </label>
-      <input type="text" onChange={event => {setEmailBody(event.target.value);}}/>
-      </div>
-
-      <div className='column'>
+      <div className='row'>
       <label> Job Title: </label>
       <input type="text" onChange={event => {setJoblTitle(event.target.value);}} />
       <label> Job Company: </label>
@@ -81,12 +76,14 @@ function App(){
       
 
       <h1> Emails List </h1>
-
+      <Table />
+{/* 
       {emailsList.map((val,key)=>{
         return (
         <div key={key} className='job'>
-          <h4> {val.jobTitle}</h4>
-          <p> {val.jobCompany}</p> 
+          <h4> {val.jobCompany}</h4>
+          <h1> {val.jobTitle}</h1>
+          <p>{val.date}</p>
           <input 
           type="text" 
           placeholder='New job title...' 
@@ -98,7 +95,7 @@ function App(){
           <button onClick={() => deleteJob(val._id)}> Delete</button>
           </div>
         );
-      })}
+      })} */}
 
     </div>
 
@@ -106,35 +103,3 @@ function App(){
 }
 export default App;
 
-// Components
-// import Navbar from './components/Navbar';
-
-// function App() {
-
-//   const [listOfEmails, setListOfEmails] = useState([]);
-  
-//   useEffect(() => {
-//       axios.get("http://localhost:5000/api/emails").then((res) => {
-//         console.log(res.data);
-//         setListOfEmails(res.data);
-//       })
-//   }, []);
-
-//   return (
-    
-//     <div className="App"> 
-    
-//     <header className="App-header">
-//       My Emails:
-//       </header>
-      
-      
-//       {listOfEmails.map((value, key)=> {
-//         return <div> {value} </div>;
-//         })}
-      
-//     </div>
-//   );
-// }
-
-// export default App;

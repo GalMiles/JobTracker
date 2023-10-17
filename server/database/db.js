@@ -14,12 +14,26 @@ async function connectDB() {
 }
 
 async function insertJob(req, res) {
-    const emailTitle = req.body.emailTitle;
-    const emailBody = req.body.emailBody;
     const jobTitle = req.body.jobTitle;
     const jobCompany = req.body.jobCompany;
 
-    const email = new EmailModel({ emailTitle: emailTitle, emailBody: emailBody, jobTitle: jobTitle, jobCompany: jobCompany });
+    const email = new EmailModel({ jobTitle: jobTitle, jobCompany: jobCompany, date: Date.now() });
+
+    try {
+        await email.save();
+        res.send("inserted data");
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+async function insertEmailJob(job) {
+    const date = job.date;
+    const jobCompany = job.company;
+    const jobTitle = job.position;
+
+    const email = new EmailModel({ jobTitle: jobTitle, jobCompany: jobCompany, data: date });
 
     try {
         await email.save();
@@ -67,7 +81,7 @@ async function deleteJob(req, res) {
     res.send("item is deleted");
 }
 
-module.exports = {connectDB, insertJob, getJobs, updateJob, deleteJob};
+module.exports = {connectDB, insertJob, getJobs, updateJob, deleteJob, insertEmailJob};
 
 
 
